@@ -3235,6 +3235,13 @@ function! s:JumpToTag(stay_in_tagbar) abort
 
     let autoclose = w:autoclose
 
+    if s:is_maximized && !a:stay_in_tagbar
+        execute 'vertical resize ' . g:tagbar_width
+        execute s:winrestcmd
+        let s:is_maximized = 0
+    endif
+
+
     if empty(taginfo) || !taginfo.isNormalTag()
         return
     endif
